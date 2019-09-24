@@ -365,13 +365,16 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const squares = current.squares.slice();
 
-    for (let i = 0; i < this.state.history.length; i++) {
-      document.getElementById(i).style.background = '#4CAF50';
-    }
+
 
     if (this.calculateWinner(current.squares) || squares[i]) {
       return;
     }
+
+    for (let i = 0; i < this.state.history.length; i++) {
+      document.getElementById(i).style.background = '#4CAF50';
+    }
+    
     value = i;
     backupvalue = value;
     squares[i] = this.state.xIsNext ? 'X' : 'O';
