@@ -54,6 +54,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(400).fill(null),
+        position: -1,
       }],
       xIsNext: true,
       stepNumber: 0,
@@ -343,6 +344,7 @@ class Game extends React.Component {
       xIsNext: true,
       history: [{
         squares: Array(400).fill(null),
+        position: -1,
       }],
       stepNumber: 0,
       colors: Array(400).fill('#f5d5ae'),
@@ -377,6 +379,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        position: value,
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -402,7 +405,7 @@ class Game extends React.Component {
     if (this.state.isIncrease) {
       for (let i = 0; i < history.length; i++) {
         const desc = i ?
-          'Đi lại bước ' + i :
+          'Đi lại bước ' + i + ': [' + Math.floor(history[i].position/MaxWidth) + ';' + ((history[i].position%MaxWidth)) + ']':
           'Đi lại từ đầu';
 
         moves.push(
@@ -413,8 +416,7 @@ class Game extends React.Component {
     } else {
       for (let i = history.length - 1; i >= 0; i--) {
         const desc = i ?
-          'Đi lại bước ' + i :
-          'Đi lại từ đầu';
+        'Đi lại bước ' + i + ': [' + Math.floor(history[i].position/MaxWidth) + ';' + ((history[i].position%MaxWidth)) + ']':          'Đi lại từ đầu';
 
         moves.push(
           <li key={i}>
